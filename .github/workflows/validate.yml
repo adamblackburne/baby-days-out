@@ -1,0 +1,16 @@
+name: Validate events.json
+
+on:
+  push:
+    paths: ["events.json", "scripts/validate.py", ".github/workflows/validate.yml"]
+  pull_request:
+    paths: ["events.json", "scripts/validate.py", ".github/workflows/validate.yml"]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check events.json
+        run: python3 scripts/validate.py events.json
