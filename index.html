@@ -44,7 +44,7 @@ main{padding-block:28px 60px}
 .day:hover{border-color:var(--line)}
 .day b{font-family:Fredoka,sans-serif;font-size:15px}.day span.n{font-size:30px;font-family:Fredoka,sans-serif;line-height:1}
 .mags{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto}
-.mag{width:18px;height:18px;border-radius:50%;box-shadow:0 2px 0 rgba(0,0,0,.18),inset 0 2px 0 rgba(255,255,255,.35)}
+.mag{width:18px;height:18px;border-radius:50%}
 .mag.local{background:var(--loc)}.mag.central{background:var(--cen)}.mag.hl{outline:3px solid var(--sun)}
 .day.empty{opacity:.55}
 .day.past{opacity:.35}
@@ -66,8 +66,8 @@ main{padding-block:28px 60px}
 .chip{font-size:13px;font-weight:700;padding:2px 10px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
 @media(max-width:520px){.chip{white-space:normal;max-width:100%;overflow-wrap:anywhere}}
 .chip.local{background:var(--loc);color:#fff;border-color:transparent}.chip.central{background:var(--cen);color:var(--bg);border-color:transparent}
-.chip.new{background:var(--ink);color:var(--bg);border-color:transparent}
-.chip.ok{color:var(--ok)}.chip.warn{color:var(--warn)}.chip.star{background:var(--sun);color:var(--sunInk);border-color:transparent}
+
+.chip.star{background:var(--sun);color:var(--sunInk);border-color:transparent}
 details{margin-top:8px}summary{cursor:pointer;font-weight:700;min-height:32px}
 dl{display:grid;grid-template-columns:7em minmax(0,1fr);gap:4px 12px;margin:8px 0}dt{color:var(--mute)}dd{margin:0}
 .links a{display:inline-block;margin:4px 12px 0 0;font-weight:700;overflow-wrap:anywhere}
@@ -110,7 +110,6 @@ dl{display:grid;grid-template-columns:7em minmax(0,1fr);gap:4px 12px;margin:8px 
     </div>
     <select id="cat" aria-label="Type of activity"><option value="">All types</option></select>
     <label class="tog"><input type="checkbox" id="free"> Free only</label>
-    <label class="tog"><input type="checkbox" id="ver"> Verified only</label>
   </div>
 </div></header>
 
@@ -173,13 +172,12 @@ const weekOf=()=>{const t=new Date();t.setDate(t.getDate()-((t.getDay()+6)%7));c
 const longDay=s=>fmt(s,{weekday:'long',day:'numeric',month:'long'});
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 
-let data=null,F={area:store.get('bdo-area')||'all',cat:'',free:false,ver:false};
+let data=null,F={area:store.get('bdo-area')||'all',cat:'',free:false};
 let calMonth=null,calDay=null;
 let lastView=null;
 
-const pass=e=>(F.area==='all'||e.area===F.area)&&(!F.cat||e.category===F.cat)&&(!F.free||e.free)&&(!F.ver||e.status==='verified');
+const pass=e=>(F.area==='all'||e.area===F.area)&&(!F.cat||e.category===F.cat)&&(!F.free||e.free);
 const byTime=(a,b)=>(a.date+(a.start||'99')).localeCompare(b.date+(b.start||'99'));
-const isNew=e=>e.added>=(data.new_since||data.updated);
 
 function card(e){
   const links=[{label:'Open event page',url:e.url},...(e.urls||[])];
@@ -191,9 +189,7 @@ function card(e){
       <span class="chip ${e.area}">${e.area==='local'?'Local':'Central'}</span>
       <span class="chip">${esc(e.category)}</span>
       <span class="chip">${e.free?'Free':esc(e.cost)}</span>
-      ${e.status==='verified'?'<span class="chip ok">✓ Verified</span>':'<span class="chip warn">Check before travelling</span>'}
       ${e.highlight?'<span class="chip star">★ Highlight</span>':''}
-      ${isNew(e)?'<span class="chip new">New</span>':''}
     </div>
     <details><summary>Details and booking</summary>
       <dl>
@@ -201,7 +197,6 @@ function card(e){
         <dt>Cost</dt><dd>${esc(e.cost)}</dd>
         <dt>Booking</dt><dd>${esc(e.booking)}</dd>
         <dt>Organiser</dt><dd>${esc(e.organiser)}</dd>
-        ${e.status_note?`<dt>Status</dt><dd>${esc(e.status_note)}</dd>`:''}
         ${e.highlight_reason?`<dt>Why go</dt><dd>${esc(e.highlight_reason)}</dd>`:''}
       </dl>
       <div class="links">${links.map(l=>`<a href="${esc(safeUrl(l.url))}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('')}</div>
@@ -219,8 +214,7 @@ function renderWeek(pfx,s,en,label,hlInWeek){
   const all=data.events.filter(e=>e.date&&e.date>=s&&e.date<=en);
   const list=all.filter(e=>e.date>=from).filter(pass).sort(byTime);
   $('#'+pfx+'-title').textContent=label+': '+fmt(s,{day:'numeric',month:'short'})+' – '+fmt(en,{day:'numeric',month:'short',year:'numeric'});
-  const nNew=list.filter(isNew).length;
-  $('#'+pfx+'-meta').innerHTML=`<span>${list.length} event${list.length===1?'':'s'} ${pfx==='wk'?'still to come this week':'next week'}</span><span>${nNew} new since Monday</span><span style="color:var(--mute)">Updated ${esc(fmt(data.updated,{weekday:'short',day:'numeric',month:'short'}))}</span>`;
+  $('#'+pfx+'-meta').innerHTML=`<span>${list.length} event${list.length===1?'':'s'} ${pfx==='wk'?'still to come this week':'next week'}</span><span style="color:var(--mute)">Updated ${esc(fmt(data.updated,{weekday:'short',day:'numeric',month:'short'}))}</span>`;
   let strip='';
   for(let i=0;i<7;i++){const k=addDays(s,i),d=D(k);const past=k<W.today;const es=past?[]:list.filter(e=>e.date===k);
     strip+=`<a class="day${es.length?'':' empty'}${past?' past':''}" href="#${pfx==='wk'?'this-week':'next-week'}" data-jump="${pfx}-${k}"><b>${d.toLocaleDateString('en-GB',{weekday:'short'})}</b><span class="n">${d.getDate()}</span><div class="mags">${es.map(e=>`<i class="mag ${e.area}${e.highlight?' hl':''}" title="${esc(e.title)}"></i>`).join('')}</div></a>`;}
@@ -272,7 +266,6 @@ document.querySelectorAll('#area button').forEach(b=>b.addEventListener('click',
 document.querySelectorAll('#area button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.a===F.area));
 $('#cat').addEventListener('change',e=>{F.cat=e.target.value;render()});
 $('#free').addEventListener('change',e=>{F.free=e.target.checked;render()});
-$('#ver').addEventListener('change',e=>{F.ver=e.target.checked;render()});
 $('#prev').addEventListener('click',()=>{calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()-1,1);calDay=null;renderCal()});
 $('#next').addEventListener('click',()=>{calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()+1,1);calDay=null;renderCal()});
 $('#cal').addEventListener('click',e=>{const c=e.target.closest('.cell');if(!c)return;calDay=calDay===c.dataset.day?null:c.dataset.day;renderCal();if(calDay){const t=document.getElementById('cal-'+calDay);if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}});

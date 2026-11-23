@@ -19,10 +19,8 @@
       "age": "Under-5s, babies welcome",
       "cost": "Free",
       "free": true,
-      "booking": "No booking",
+      "booking": "No booking · Term time only",
       "url": "https://libraries.lewisham.gov.uk/events/199467",
-      "status": "unverified",
-      "status_note": "Recurring Tuesday session (term time); not confirmed for this date",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -40,10 +38,8 @@
       "age": "Babies",
       "cost": "Free",
       "free": true,
-      "booking": "Drop-in",
+      "booking": "Drop-in · Term time only",
       "url": "https://www.bromley.gov.uk/directory-record/7821/baby-bounce-and-rhyme",
-      "status": "unverified",
-      "status_note": "Recurring Tuesday and Friday session (term time); not confirmed for this date",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -63,7 +59,6 @@
       "free": true,
       "booking": "Drop-in, no booking",
       "url": "https://www.better.org.uk/library/london/bromley/penge-library/whats-on",
-      "status": "verified",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -83,7 +78,6 @@
       "free": true,
       "booking": "Session times and booking not stated; check the page",
       "url": "https://www.vam.ac.uk/event/gDB2DV0e4rb/sound-explorers-nov-dec-2026",
-      "status": "verified",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -103,7 +97,6 @@
       "free": true,
       "booking": "Free ticket via DesignMyNight",
       "url": "https://www.designmynight.com/london/pubs/crystal-palace/the-faber-fox/mummy-writes-baby-toddler-class",
-      "status": "verified",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -123,7 +116,6 @@
       "free": true,
       "booking": "Booking essential (free, via Eventbrite)",
       "url": "https://www.riba.org/whats-on/riba-baby-at-the-london-archives-festive-edition/",
-      "status": "verified",
       "highlight": true,
       "highlight_reason": "Free festive session of live music, songs and play built around architecture.",
       "added": "2026-11-23"
@@ -144,8 +136,6 @@
       "free": false,
       "booking": "Book in advance; also 11:30–12:30 and Tuesday classes at Azelia Hall",
       "url": "https://www.happity.co.uk/baby-sensory/beckenham",
-      "status": "unverified",
-      "status_note": "Listing not dated for December 2026",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -165,7 +155,6 @@
       "free": true,
       "booking": "Session times and booking not stated; check the page",
       "url": "https://www.vam.ac.uk/event/gDB2DV0e4rb/sound-explorers-nov-dec-2026",
-      "status": "verified",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -183,7 +172,7 @@
       "age": "Babies up to 12 months",
       "cost": "£10 per adult (includes a hot drink); babies free with a ticket",
       "free": false,
-      "booking": "Book online; babies need a free ticket",
+      "booking": "Sold out; join the waiting list online. Babies need a free ticket",
       "url": "https://bookings.thegardencinema.co.uk/TheGardenCinema.dll/TSelectItems.waSelectItemsPrompt.TcsWebMenuItem_0.TcsWebTab_0.TcsPerformance_6652534.TcsSection_3060731",
       "urls": [
         {
@@ -191,8 +180,6 @@
           "url": "https://www.thegardencinema.co.uk/strand/bring-your-baby-screenings/"
         }
       ],
-      "status": "verified",
-      "status_note": "Sold out when checked; waiting list open",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -210,10 +197,8 @@
       "age": "Babies",
       "cost": "Free",
       "free": true,
-      "booking": "Drop-in",
+      "booking": "Drop-in · Term time only",
       "url": "https://www.bromley.gov.uk/directory-record/7821/baby-bounce-and-rhyme",
-      "status": "unverified",
-      "status_note": "Recurring Tuesday and Friday session (term time); not confirmed for this date",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -231,10 +216,8 @@
       "age": "Babies 12 months and under",
       "cost": "£6 per adult (+£1.50 online booking fee)",
       "free": false,
-      "booking": "Book online or in person; up to four adults per baby",
+      "booking": "Book online or in person; up to four adults per baby; see the Barbican page for the film and time",
       "url": "https://www.barbican.org.uk/whats-on/2026/event/parent-baby-screening-you-can-see-everything",
-      "status": "unverified",
-      "status_note": "Film runs 21–30 Nov; Saturday 11:15 start not yet confirmed",
       "highlight": false,
       "added": "2026-11-23",
       "urls": [
@@ -258,10 +241,8 @@
       "age": "0–2 years",
       "cost": "Free",
       "free": true,
-      "booking": "Drop-in, no need to book",
+      "booking": "Drop-in, no need to book · Term time only",
       "url": "https://bromley.simplyconnect.uk/activities/e4a53e40-c40f-11ed-a195-d94892dda656/childrens-activities-at-shortlands-library",
-      "status": "unverified",
-      "status_note": "Recurring Monday session (term time); not confirmed for this date",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -279,10 +260,8 @@
       "age": "Babies 12 months and under",
       "cost": "£6 per adult (+£1.50 online booking fee)",
       "free": false,
-      "booking": "Book online or in person; up to four adults per baby",
+      "booking": "Book online or in person; up to four adults per baby; see the Barbican page for the film and time",
       "url": "https://www.barbican.org.uk/whats-on/2026/event/parent-baby-screening-you-can-see-everything",
-      "status": "unverified",
-      "status_note": "Film runs 21–30 Nov; 11:15 is the usual start, not yet confirmed for this date",
       "highlight": false,
       "added": "2026-11-23",
       "urls": [
@@ -306,10 +285,8 @@
       "age": "Under-5s, babies welcome",
       "cost": "Free",
       "free": true,
-      "booking": "No booking",
+      "booking": "No booking · Term time only",
       "url": "https://libraries.lewisham.gov.uk/events/199467",
-      "status": "unverified",
-      "status_note": "Recurring Tuesday session (term time); not confirmed for this date",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -327,10 +304,8 @@
       "age": "Babies",
       "cost": "Free",
       "free": true,
-      "booking": "Drop-in",
+      "booking": "Drop-in · Term time only",
       "url": "https://www.bromley.gov.uk/directory-record/7821/baby-bounce-and-rhyme",
-      "status": "unverified",
-      "status_note": "Recurring Tuesday and Friday session (term time); not confirmed for this date",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -356,7 +331,6 @@
           "url": "https://www.vam.ac.uk/shop/ticket?cgid=Design_Baby___December_2026"
         }
       ],
-      "status": "verified",
       "highlight": true,
       "highlight_reason": "Free, child-led sensory sculpture play, and the 11:00 slot is for pre-walkers.",
       "added": "2026-11-23"
@@ -377,7 +351,6 @@
       "free": true,
       "booking": "Drop-in, no booking",
       "url": "https://www.better.org.uk/library/london/bromley/penge-library/whats-on",
-      "status": "verified",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -397,7 +370,6 @@
       "free": true,
       "booking": "Session times and booking not stated; check the page",
       "url": "https://www.vam.ac.uk/event/gDB2DV0e4rb/sound-explorers-nov-dec-2026",
-      "status": "verified",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -417,7 +389,6 @@
       "free": false,
       "booking": "Book online; door tickets subject to availability",
       "url": "https://actorschurch.org/whatson/baby-gospel-christmas-concert/",
-      "status": "verified",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -437,7 +408,6 @@
       "free": true,
       "booking": "Free ticket via DesignMyNight",
       "url": "https://www.designmynight.com/london/pubs/crystal-palace/the-faber-fox/mummy-writes-baby-toddler-class",
-      "status": "verified",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -457,8 +427,6 @@
       "free": false,
       "booking": "Book in advance; also 11:30–12:30 and Tuesday classes at Azelia Hall",
       "url": "https://www.happity.co.uk/baby-sensory/beckenham",
-      "status": "unverified",
-      "status_note": "Listing not dated for December 2026",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -484,8 +452,6 @@
           "url": "https://www.planomato.com/en/london/p/wordplay-ages-0-2-southbank-centre"
         }
       ],
-      "status": "unverified",
-      "status_note": "Fortnightly session confirmed; this date from a third-party listing",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -505,7 +471,6 @@
       "free": true,
       "booking": "Session times and booking not stated; check the page",
       "url": "https://www.vam.ac.uk/event/gDB2DV0e4rb/sound-explorers-nov-dec-2026",
-      "status": "verified",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -523,10 +488,8 @@
       "age": "Babies",
       "cost": "Free",
       "free": true,
-      "booking": "Drop-in",
+      "booking": "Drop-in · Term time only",
       "url": "https://www.bromley.gov.uk/directory-record/7821/baby-bounce-and-rhyme",
-      "status": "unverified",
-      "status_note": "Recurring Tuesday and Friday session (term time); not confirmed for this date",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -544,10 +507,8 @@
       "age": "Babies 12 months and under",
       "cost": "£6 per adult (+£1.50 online fee)",
       "free": false,
-      "booking": "Book online or in person; up to four adults per baby",
+      "booking": "Book online or in person; up to four adults per baby; see the Barbican page for the film and time",
       "url": "https://www.barbican.org.uk/whats-on/series/parent-and-baby-screenings",
-      "status": "unverified",
-      "status_note": "Weekly Monday and Saturday series; films for these dates not confirmed",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -573,8 +534,6 @@
           "url": "https://www.southkenculturequarter.com/itinerary/christmas-south-kensington/"
         }
       ],
-      "status": "verified",
-      "status_note": "Date and time from two listings; price not found",
       "highlight": true,
       "highlight_reason": "A baby concert in the Royal Albert Hall's intimate Elgar Room.",
       "added": "2026-11-23"
@@ -601,8 +560,6 @@
           "url": "https://www.southkenculturequarter.com/itinerary/christmas-south-kensington/"
         }
       ],
-      "status": "verified",
-      "status_note": "Date and time from two listings; price not found",
       "highlight": true,
       "highlight_reason": "Show tunes for babies in the Royal Albert Hall's Elgar Room.",
       "added": "2026-11-23"
@@ -623,7 +580,6 @@
       "free": false,
       "booking": "Book online",
       "url": "https://actorschurch.org/whatson/baby-broadway-christmas-concert1/",
-      "status": "verified",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -643,7 +599,6 @@
       "free": true,
       "booking": "Free ticket via DesignMyNight",
       "url": "https://www.designmynight.com/london/pubs/crystal-palace/the-faber-fox/mummy-writes-baby-toddler-class",
-      "status": "verified",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -669,7 +624,6 @@
           "url": "https://www.eventbrite.co.uk/o/bach-to-baby-7650818445"
         }
       ],
-      "status": "verified",
       "highlight": true,
       "highlight_reason": "Live classical Christmas concert for babies, a short hop from Penge; crying and feeding expected.",
       "added": "2026-11-23"
@@ -690,7 +644,6 @@
       "free": true,
       "booking": "Drop-in; online booking recommended",
       "url": "https://www.londonmuseum.org.uk/whats-on/tots-at-the-docks/",
-      "status": "verified",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -716,8 +669,6 @@
           "url": "https://ticketing.nhm.ac.uk/events/VISEV-ABBA"
         }
       ],
-      "status": "unverified",
-      "status_note": "Various dates; December dates not visible, check the booking page",
       "highlight": false,
       "added": "2026-11-23"
     }
