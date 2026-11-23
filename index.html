@@ -47,6 +47,7 @@ main{padding-block:28px 60px}
 .mag{width:18px;height:18px;border-radius:50%;box-shadow:0 2px 0 rgba(0,0,0,.18),inset 0 2px 0 rgba(255,255,255,.35)}
 .mag.local{background:var(--loc)}.mag.central{background:var(--cen)}.mag.hl{outline:3px solid var(--sun)}
 .day.empty{opacity:.55}
+.day.past{opacity:.35}
 .key{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--mute);margin-top:-22px;margin-bottom:30px}
 .key span{display:inline-flex;align-items:center;gap:6px}.key .mag{width:12px;height:12px}
 .cal-key{margin:0 0 14px}.sq{width:14px;height:14px;border-radius:4px;background:var(--card);display:inline-block}.sq.today{border:2px solid var(--ink)}.sq.sel{border:2px solid var(--sun)}
@@ -83,7 +84,8 @@ dl{display:grid;grid-template-columns:7em minmax(0,1fr);gap:4px 12px;margin:8px 
 .err{padding:40px 0;color:var(--mute)}
 [hidden]{display:none!important}
 @media(max-width:760px){.week{grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.day{min-height:96px;padding:8px 5px;border-radius:12px}.day b{font-size:13px}.day span.n{font-size:22px}.mag{width:12px;height:12px}.cell{min-height:58px;padding:4px}.cell .ln{font-size:0;height:8px;padding:0}}
-@media(max-width:600px){.ev{grid-template-columns:4.4em minmax(0,1fr);gap:10px}.ev .t{font-size:17px}dl{grid-template-columns:minmax(0,1fr)}dt{margin-top:4px}nav a{padding:10px 11px}}
+@media(max-width:600px){.ev{grid-template-columns:4.4em minmax(0,1fr);gap:10px}.ev .t{font-size:17px}dl{grid-template-columns:minmax(0,1fr)}dt{margin-top:4px}nav a{padding:10px 11px}
+@media(max-width:420px){nav{gap:0;width:100%;justify-content:space-between;flex-wrap:nowrap}nav a{padding:10px 6px;font-size:14px;white-space:nowrap}}}
 @media(prefers-reduced-motion:no-preference){.view{animation:in .25s ease-out}@keyframes in{from{opacity:0;transform:translateY(6px)}}}
 </style>
 </head>
@@ -93,6 +95,7 @@ dl{display:grid;grid-template-columns:7em minmax(0,1fr);gap:4px 12px;margin:8px 
     <div class="brand"><i aria-hidden="true"></i>Baby Days Out</div>
     <nav aria-label="Views">
       <a href="#this-week" data-v="this-week">This week</a>
+      <a href="#next-week" data-v="next-week">Next week</a>
       <a href="#calendar" data-v="calendar">Calendar</a>
       <a href="#ahead" data-v="ahead">Further ahead</a>
     </nav>
@@ -116,9 +119,20 @@ dl{display:grid;grid-template-columns:7em minmax(0,1fr);gap:4px 12px;margin:8px 
     <div class="week" id="wk-strip"></div>
     <div class="key"><span><i class="mag local"></i>Local (SE20 and nearby)</span><span><i class="mag central"></i>Central London</span><span><i class="mag local hl"></i>Highlight</span></div>
     <h2>Highlights coming up</h2>
-    <div class="hls" id="hls"></div>
+    <div class="hls" id="wk-hls"></div>
     <h2>Day by day</h2>
     <div id="wk-list"></div>
+  </section>
+
+  <section class="view" id="v-next-week" hidden>
+    <h1 id="nx-title">Next week</h1>
+    <div class="meta" id="nx-meta"></div>
+    <div class="week" id="nx-strip"></div>
+    <div class="key"><span><i class="mag local"></i>Local (SE20 and nearby)</span><span><i class="mag central"></i>Central London</span><span><i class="mag local hl"></i>Highlight</span></div>
+    <h2>Highlights next week</h2>
+    <div class="hls" id="nx-hls"></div>
+    <h2>Day by day</h2>
+    <div id="nx-list"></div>
   </section>
 
   <section class="view" id="v-calendar" hidden>
@@ -136,7 +150,7 @@ dl{display:grid;grid-template-columns:7em minmax(0,1fr);gap:4px 12px;margin:8px 
 
   <section class="view" id="v-ahead" hidden>
     <h1>Further ahead</h1>
-    <p class="lede">One-offs and events after the coming week, plus sessions with dates still to check.</p>
+    <p class="lede">Events after next week, plus sessions with dates still to check.</p>
     <div id="ahead-list"></div>
   </section>
 
@@ -152,6 +166,8 @@ const safeUrl=u=>/^https?:\/\//i.test(u||'')?u:'#';
 const D=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
 const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
 const fmt=(s,o)=>D(s).toLocaleDateString('en-GB',o);
+const addDays=(s,n)=>{const d=D(s);d.setDate(d.getDate()+n);return iso(d)};
+const weekOf=()=>{const t=new Date();t.setDate(t.getDate()-((t.getDay()+6)%7));const s=iso(t);return {s,e:addDays(s,6),ns:addDays(s,7),ne:addDays(s,13),today:iso(new Date())}};
 const longDay=s=>fmt(s,{weekday:'long',day:'numeric',month:'long'});
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
 
@@ -189,26 +205,26 @@ function card(e){
     </details>
   </div></article>`;
 }
-function grouped(list){
+function grouped(list,pfx='d'){
   if(!list.length)return '<p class="empty-note">Nothing matches these filters.</p>';
   const g={};list.forEach(e=>(g[e.date]=g[e.date]||[]).push(e));
-  return Object.keys(g).sort().map(d=>`<div class="dayhead" id="d-${d}"><h3>${longDay(d)}</h3><small>${g[d].length} event${g[d].length>1?'s':''}</small></div>${g[d].sort(byTime).map(card).join('')}`).join('');
+  return Object.keys(g).sort().map(d=>`<div class="dayhead" id="${pfx}-${d}"><h3>${longDay(d)}</h3><small>${g[d].length} event${g[d].length>1?'s':''}</small></div>${g[d].sort(byTime).map(card).join('')}`).join('');
 }
 
-function renderWeek(){
-  const s=data.week_start,en=data.week_end;
+function renderWeek(pfx,s,en,label,hlInWeek){
+  const W=weekOf(),from=s<W.today?W.today:s;
   const all=data.events.filter(e=>e.date&&e.date>=s&&e.date<=en);
-  const list=all.filter(pass).sort(byTime);
-  $('#wk-title').textContent='Week of '+fmt(s,{day:'numeric',month:'short'})+' – '+fmt(en,{day:'numeric',month:'short',year:'numeric'});
-  const nNew=data.events.filter(e=>isNew(e)&&pass(e)).length;
-  $('#wk-meta').innerHTML=`<span>${list.length} event${list.length===1?'':'s'} this week</span><span>${nNew} new since Monday</span><span style="color:var(--mute)">Updated ${esc(fmt(data.updated,{weekday:'short',day:'numeric',month:'short'}))}</span>`;
+  const list=all.filter(e=>e.date>=from).filter(pass).sort(byTime);
+  $('#'+pfx+'-title').textContent=label+': '+fmt(s,{day:'numeric',month:'short'})+' – '+fmt(en,{day:'numeric',month:'short',year:'numeric'});
+  const nNew=list.filter(isNew).length;
+  $('#'+pfx+'-meta').innerHTML=`<span>${list.length} event${list.length===1?'':'s'} ${pfx==='wk'?'still to come this week':'next week'}</span><span>${nNew} new since Monday</span><span style="color:var(--mute)">Updated ${esc(fmt(data.updated,{weekday:'short',day:'numeric',month:'short'}))}</span>`;
   let strip='';
-  for(let i=0;i<7;i++){const d=D(s);d.setDate(d.getDate()+i);const k=iso(d);const es=list.filter(e=>e.date===k);
-    strip+=`<a class="day${es.length?'':' empty'}" href="#this-week" data-jump="${k}"><b>${d.toLocaleDateString('en-GB',{weekday:'short'})}</b><span class="n">${d.getDate()}</span><div class="mags">${es.map(e=>`<i class="mag ${e.area}${e.highlight?' hl':''}" title="${esc(e.title)}"></i>`).join('')}</div></a>`;}
-  $('#wk-strip').innerHTML=strip;
-  const hl=data.events.filter(e=>e.highlight&&e.date&&e.date>=s&&pass(e)).sort(byTime).slice(0,6);
-  $('#hls').innerHTML=hl.length?hl.map(e=>`<div class="hl-card"><div class="when">${esc(fmt(e.date,{weekday:'short',day:'numeric',month:'short'}))}${e.start?' · '+esc(e.start):''}</div><h3>${esc(e.title)}</h3><p>${esc(e.highlight_reason||'')}<br>${esc(e.venue)}</p><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener">Open event ↗</a></div>`).join(''):'<p class="empty-note">No highlights match these filters.</p>';
-  $('#wk-list').innerHTML=grouped(list);
+  for(let i=0;i<7;i++){const k=addDays(s,i),d=D(k);const past=k<W.today;const es=past?[]:list.filter(e=>e.date===k);
+    strip+=`<a class="day${es.length?'':' empty'}${past?' past':''}" href="#${pfx==='wk'?'this-week':'next-week'}" data-jump="${pfx}-${k}"><b>${d.toLocaleDateString('en-GB',{weekday:'short'})}</b><span class="n">${d.getDate()}</span><div class="mags">${es.map(e=>`<i class="mag ${e.area}${e.highlight?' hl':''}" title="${esc(e.title)}"></i>`).join('')}</div></a>`;}
+  $('#'+pfx+'-strip').innerHTML=strip;
+  const hl=data.events.filter(e=>e.highlight&&e.date&&e.date>=from&&(!hlInWeek||e.date<=en)&&pass(e)).sort(byTime).slice(0,6);
+  $('#'+pfx+'-hls').innerHTML=hl.length?hl.map(e=>`<div class="hl-card"><div class="when">${esc(fmt(e.date,{weekday:'short',day:'numeric',month:'short'}))}${e.start?' · '+esc(e.start):''}</div><h3>${esc(e.title)}</h3><p>${esc(e.highlight_reason||'')}<br>${esc(e.venue)}</p><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener">Open event ↗</a></div>`).join(''):'<p class="empty-note">No highlights match these filters.</p>';
+  $('#'+pfx+'-list').innerHTML=grouped(list,pfx);
 }
 
 function renderCal(){
@@ -225,17 +241,18 @@ function renderCal(){
 }
 
 function renderAhead(){
-  const list=data.events.filter(e=>e.date&&e.date>data.week_end&&pass(e)).sort(byTime);
+  const list=data.events.filter(e=>e.date&&e.date>weekOf().ne&&pass(e)).sort(byTime);
   const undated=data.events.filter(e=>!e.date&&pass(e));
   $('#ahead-list').innerHTML=grouped(list)+(undated.length?`<div class="dayhead"><h3>Dates to check</h3><small>bookable on selected dates</small></div>${undated.map(card).join('')}`:'');
 }
 
 function render(){
-  const v=['this-week','calendar','ahead'].includes(location.hash.slice(1))?location.hash.slice(1):'this-week';
+  const v=['this-week','next-week','calendar','ahead'].includes(location.hash.slice(1))?location.hash.slice(1):'this-week';
   document.querySelectorAll('.view').forEach(s=>s.hidden=s.id!=='v-'+v);
   document.querySelectorAll('nav a').forEach(a=>{if(a.dataset.v===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
   if(!data)return;
-  if(v==='this-week')renderWeek();else if(v==='calendar')renderCal();else renderAhead();
+  const W=weekOf();
+  if(v==='this-week')renderWeek('wk',W.s,W.e,'This week',false);else if(v==='next-week')renderWeek('nx',W.ns,W.ne,'Next week',true);else if(v==='calendar')renderCal();else renderAhead();
 }
 
 document.querySelectorAll('#area button').forEach(b=>b.addEventListener('click',()=>{F.area=b.dataset.a;store.set('bdo-area',F.area);document.querySelectorAll('#area button').forEach(x=>x.setAttribute('aria-pressed',x===b));render()}));
@@ -246,7 +263,7 @@ $('#ver').addEventListener('change',e=>{F.ver=e.target.checked;render()});
 $('#prev').addEventListener('click',()=>{calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()-1,1);calDay=null;renderCal()});
 $('#next').addEventListener('click',()=>{calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()+1,1);calDay=null;renderCal()});
 $('#cal').addEventListener('click',e=>{const c=e.target.closest('.cell');if(!c)return;calDay=calDay===c.dataset.day?null:c.dataset.day;renderCal()});
-$('#wk-strip').addEventListener('click',e=>{const a=e.target.closest('[data-jump]');if(!a)return;e.preventDefault();const t=document.getElementById('d-'+a.dataset.jump);if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
+document.querySelectorAll('#wk-strip,#nx-strip').forEach(el=>el.addEventListener('click',e=>{const a=e.target.closest('[data-jump]');if(!a)return;e.preventDefault();const t=document.getElementById(a.dataset.jump);if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}));
 window.addEventListener('hashchange',render);
 
 render();
@@ -254,8 +271,8 @@ fetch('events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json(
   data=j;data.events=data.events||[];
   const cats=[...new Set(data.events.map(e=>e.category))].sort();
   $('#cat').insertAdjacentHTML('beforeend',cats.map(c=>`<option>${esc(c)}</option>`).join(''));
-  const t=new Date(),ws=D(data.week_end),c=t>ws?t:ws;calMonth=new Date(c.getFullYear(),c.getMonth(),1);
-  if(data.notes){$('#notes').hidden=false;$('#notes').innerHTML='<strong>Not included this week:</strong> '+esc(data.notes)+'<br><br>Times and availability can change, so confirm with the organiser before travelling.'}
+  const t=new Date();calMonth=new Date(t.getFullYear(),t.getMonth(),1);
+  if(data.notes){$('#notes').hidden=false;$('#notes').innerHTML='<strong>Still to confirm:</strong> '+esc(data.notes)+'<br><br>Times and availability can change, so confirm with the organiser before travelling.'}
   render();
 }).catch(()=>{$('#err').hidden=false});
 }
