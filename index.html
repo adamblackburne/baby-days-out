@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Baby Days Out</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: warm, practical, a parent's fridge planner — quick to scan with a baby on one arm.
+   IDEA: a fridge-door week planner with coloured magnets: coral = local, indigo = central London.
+   PICTURE: the coming week as seven big day tiles, each holding its magnets; then the day-by-day list.
+   COLOUR and TYPE: white ground, deep ink, coral + indigo for the two areas, sun yellow for highlights; Fredoka titles, Nunito body.
+   LAYOUT: sticky tabs (This week / Calendar / Further ahead), one shared filter row, content to 1100px. */
+:root{color-scheme:light dark;--bg:light-dark(#ffffff,#14162a);--ink:light-dark(#1d2140,#f1f0f7);--mute:light-dark(#5b5f7a,#a9abc4);--line:light-dark(#e6e5ef,#2c2f4a);--card:light-dark(#f7f6fb,#1c1f37);--loc:#e8553a;--cen:light-dark(#3b45c4,#8c95ff);--sun:#ffc53d;--sunInk:#4a3500;--ok:light-dark(#1d7a4f,#6fd6a2);--warn:light-dark(#9a5a00,#ffbf66)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Nunito,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Fredoka,Nunito,sans-serif;font-weight:600;line-height:1.08;margin:0;text-wrap:balance}
+h1{font-size:clamp(32px,5vw,48px)}h2{font-size:26px}h3{font-size:18px;line-height:1.25}
+a{color:inherit}
+.wrap{max-width:1100px;margin:0 auto;padding:0 max(4vw,16px)}
+header.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;padding-block:10px}
+.brand{font-family:Fredoka,sans-serif;font-weight:600;font-size:20px;margin-right:auto;display:flex;align-items:center;gap:8px}
+.brand i{width:14px;height:14px;border-radius:50%;background:var(--loc);box-shadow:10px 0 0 var(--cen);margin-right:12px}
+nav{display:flex;gap:4px;flex-wrap:wrap}
+nav a{text-decoration:none;padding:10px 14px;border-radius:999px;font-weight:700;min-height:44px;display:inline-flex;align-items:center}
+nav a[aria-current=page]{background:var(--ink);color:var(--bg)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;padding-bottom:12px;align-items:center}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.seg button{border:0;background:none;color:var(--ink);font:inherit;font-weight:600;padding:8px 14px;min-height:44px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--card);box-shadow:inset 0 -3px 0 var(--ink)}
+select,.tog{font:inherit;font-size:16px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:8px 14px;min-height:44px}
+.tog{display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.tog input{width:18px;height:18px;accent-color:var(--ink)}
+button:focus-visible,a:focus-visible,select:focus-visible,.tog:focus-within{outline:3px solid var(--sun);outline-offset:2px}
+main{padding-block:28px 60px}
+.lede{color:var(--mute);margin:10px 0 0;max-width:62ch}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:12px;font-weight:600}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin:26px 0 34px}
+.day{background:var(--card);border-radius:16px;padding:12px 10px 14px;min-height:150px;text-decoration:none;display:flex;flex-direction:column;gap:6px;border:2px solid transparent}
+.day:hover{border-color:var(--line)}
+.day b{font-family:Fredoka,sans-serif;font-size:15px}.day span.n{font-size:30px;font-family:Fredoka,sans-serif;line-height:1}
+.mags{display:flex;flex-wrap:wrap;gap:5px;margin-top:auto}
+.mag{width:18px;height:18px;border-radius:50%;box-shadow:0 2px 0 rgba(0,0,0,.18),inset 0 2px 0 rgba(255,255,255,.35)}
+.mag.local{background:var(--loc)}.mag.central{background:var(--cen)}.mag.hl{outline:3px solid var(--sun)}
+.day.empty{opacity:.55}
+.key{display:flex;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--mute);margin-top:-22px;margin-bottom:30px}
+.key span{display:inline-flex;align-items:center;gap:6px}.key .mag{width:12px;height:12px}
+.cal-key{margin:0 0 14px}.sq{width:14px;height:14px;border-radius:4px;background:var(--card);display:inline-block}.sq.today{border:2px solid var(--ink)}.sq.sel{border:2px solid var(--sun)}
+.hls{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;margin:14px 0 40px}
+.hl-card{background:var(--sun);color:var(--sunInk);border-radius:18px;padding:18px}
+.hl-card p{margin:6px 0 10px}.hl-card .when{font-weight:700}
+.hl-card a{font-weight:700}
+.dayhead{display:flex;align-items:baseline;gap:12px;margin:34px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--ink);scroll-margin-top:150px}
+.dayhead small{color:var(--mute);font-weight:600}
+.ev{display:grid;grid-template-columns:5.2em minmax(0,1fr);gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
+.ev .t{font-family:Fredoka,sans-serif;font-size:20px;white-space:nowrap}
+.ev .t small{display:block;font-family:Nunito,sans-serif;font-size:13px;color:var(--mute)}
+.ev .where{color:var(--mute);margin:2px 0 6px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:13px;font-weight:700;padding:2px 10px;border-radius:999px;border:1px solid var(--line);white-space:nowrap}
+@media(max-width:520px){.chip{white-space:normal;max-width:100%;overflow-wrap:anywhere}}
+.chip.local{background:var(--loc);color:#fff;border-color:transparent}.chip.central{background:var(--cen);color:var(--bg);border-color:transparent}
+.chip.new{background:var(--ink);color:var(--bg);border-color:transparent}
+.chip.ok{color:var(--ok)}.chip.warn{color:var(--warn)}.chip.star{background:var(--sun);color:var(--sunInk);border-color:transparent}
+details{margin-top:8px}summary{cursor:pointer;font-weight:700;min-height:32px}
+dl{display:grid;grid-template-columns:7em minmax(0,1fr);gap:4px 12px;margin:8px 0}dt{color:var(--mute)}dd{margin:0}
+.links a{display:inline-block;margin:4px 12px 0 0;font-weight:700;overflow-wrap:anywhere}
+.empty-note{color:var(--mute);padding:14px 0}
+.cal-head{display:flex;align-items:center;gap:10px;margin:6px 0 16px}
+.cal-head button{font:inherit;font-weight:700;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;min-width:44px;min-height:44px;cursor:pointer}
+.cal{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}
+.cal .dow{font-size:13px;font-weight:700;color:var(--mute);text-align:center;padding:4px 0}
+.cell{background:var(--card);border-radius:12px;min-height:92px;padding:6px;border:2px solid transparent;cursor:pointer;text-align:left;font:inherit;color:var(--ink);display:flex;flex-direction:column;gap:4px}
+.cell.out{opacity:.35}.cell.today{border-color:var(--ink)}.cell[aria-pressed=true]{border-color:var(--sun)}
+.cell .d{font-weight:700;font-size:14px}
+.cell .ln{font-size:12px;line-height:1.25;padding:2px 5px;border-radius:6px;color:#fff;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.cell .ln.local{background:var(--loc)}.cell .ln.central{background:var(--cen);color:var(--bg)}
+.notes{margin-top:44px;padding:18px;border-radius:16px;background:var(--card);color:var(--mute);font-size:15px}
+.err{padding:40px 0;color:var(--mute)}
+[hidden]{display:none!important}
+@media(max-width:760px){.week{grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.day{min-height:96px;padding:8px 5px;border-radius:12px}.day b{font-size:13px}.day span.n{font-size:22px}.mag{width:12px;height:12px}.cell{min-height:58px;padding:4px}.cell .ln{font-size:0;height:8px;padding:0}}
+@media(max-width:600px){.ev{grid-template-columns:4.4em minmax(0,1fr);gap:10px}.ev .t{font-size:17px}dl{grid-template-columns:minmax(0,1fr)}dt{margin-top:4px}nav a{padding:10px 11px}}
+@media(prefers-reduced-motion:no-preference){.view{animation:in .25s ease-out}@keyframes in{from{opacity:0;transform:translateY(6px)}}}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+  <div class="bar">
+    <div class="brand"><i aria-hidden="true"></i>Baby Days Out</div>
+    <nav aria-label="Views">
+      <a href="#this-week" data-v="this-week">This week</a>
+      <a href="#calendar" data-v="calendar">Calendar</a>
+      <a href="#ahead" data-v="ahead">Further ahead</a>
+    </nav>
+  </div>
+  <div class="filters" role="group" aria-label="Filters">
+    <div class="seg" id="area">
+      <button type="button" data-a="all" aria-pressed="true">All</button>
+      <button type="button" data-a="local" aria-pressed="false">Local</button>
+      <button type="button" data-a="central" aria-pressed="false">Central London</button>
+    </div>
+    <select id="cat" aria-label="Type of activity"><option value="">All types</option></select>
+    <label class="tog"><input type="checkbox" id="free"> Free only</label>
+    <label class="tog"><input type="checkbox" id="ver"> Verified only</label>
+  </div>
+</div></header>
+
+<main class="wrap">
+  <section class="view" id="v-this-week" hidden>
+    <h1 id="wk-title">This week</h1>
+    <div class="meta" id="wk-meta"></div>
+    <div class="week" id="wk-strip"></div>
+    <div class="key"><span><i class="mag local"></i>Local (SE20 and nearby)</span><span><i class="mag central"></i>Central London</span><span><i class="mag local hl"></i>Highlight</span></div>
+    <h2>Highlights coming up</h2>
+    <div class="hls" id="hls"></div>
+    <h2>Day by day</h2>
+    <div id="wk-list"></div>
+  </section>
+
+  <section class="view" id="v-calendar" hidden>
+    <h1>Calendar</h1>
+    <p class="lede">Everything coming up, local and central. Tap a day to see its events.</p>
+    <div class="cal-head" style="margin-top:20px">
+      <button type="button" id="prev" aria-label="Previous month">‹</button>
+      <h2 id="cal-title" style="min-width:8em"></h2>
+      <button type="button" id="next" aria-label="Next month">›</button>
+    </div>
+    <div class="key cal-key"><span><i class="mag local"></i>Local (SE20 and nearby)</span><span><i class="mag central"></i>Central London</span><span><i class="sq today"></i>Today</span><span><i class="sq sel"></i>Selected day</span></div>
+    <div class="cal" id="cal"></div>
+    <div id="cal-list"></div>
+  </section>
+
+  <section class="view" id="v-ahead" hidden>
+    <h1>Further ahead</h1>
+    <p class="lede">One-offs and events after the coming week, plus sessions with dates still to check.</p>
+    <div id="ahead-list"></div>
+  </section>
+
+  <div class="notes" id="notes" hidden></div>
+  <p class="err" id="err" hidden>Couldn't load the events just now. Please refresh the page.</p>
+</main>
+
+<script>
+{
+const $=s=>document.querySelector(s);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const safeUrl=u=>/^https?:\/\//i.test(u||'')?u:'#';
+const D=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const fmt=(s,o)=>D(s).toLocaleDateString('en-GB',o);
+const longDay=s=>fmt(s,{weekday:'long',day:'numeric',month:'long'});
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+
+let data=null,F={area:store.get('bdo-area')||'all',cat:'',free:false,ver:false};
+let calMonth=null,calDay=null;
+
+const pass=e=>(F.area==='all'||e.area===F.area)&&(!F.cat||e.category===F.cat)&&(!F.free||e.free)&&(!F.ver||e.status==='verified');
+const byTime=(a,b)=>(a.date+(a.start||'99')).localeCompare(b.date+(b.start||'99'));
+const isNew=e=>e.added>=(data.new_since||data.updated);
+
+function card(e){
+  const links=[{label:'Open event page',url:e.url},...(e.urls||[])];
+  const t=e.start?esc(e.start)+(e.end?'<small>to '+esc(e.end)+'</small>':''):'<small>Time<br>tbc</small>';
+  return `<article class="ev"><div class="t">${t}</div><div>
+    <h3>${esc(e.title)}</h3>
+    <div class="where">${esc(e.venue)}, ${esc(e.address)}</div>
+    <div class="chips">
+      <span class="chip ${e.area}">${e.area==='local'?'Local':'Central'}</span>
+      <span class="chip">${esc(e.category)}</span>
+      <span class="chip">${e.free?'Free':esc(e.cost)}</span>
+      ${e.status==='verified'?'<span class="chip ok">✓ Verified</span>':'<span class="chip warn">Check before travelling</span>'}
+      ${e.highlight?'<span class="chip star">★ Highlight</span>':''}
+      ${isNew(e)?'<span class="chip new">New</span>':''}
+    </div>
+    <details><summary>Details and booking</summary>
+      <dl>
+        <dt>Age</dt><dd>${esc(e.age)}</dd>
+        <dt>Cost</dt><dd>${esc(e.cost)}</dd>
+        <dt>Booking</dt><dd>${esc(e.booking)}</dd>
+        <dt>Organiser</dt><dd>${esc(e.organiser)}</dd>
+        ${e.status_note?`<dt>Status</dt><dd>${esc(e.status_note)}</dd>`:''}
+        ${e.highlight_reason?`<dt>Why go</dt><dd>${esc(e.highlight_reason)}</dd>`:''}
+      </dl>
+      <div class="links">${links.map(l=>`<a href="${esc(safeUrl(l.url))}" target="_blank" rel="noopener">${esc(l.label)} ↗</a>`).join('')}</div>
+    </details>
+  </div></article>`;
+}
+function grouped(list){
+  if(!list.length)return '<p class="empty-note">Nothing matches these filters.</p>';
+  const g={};list.forEach(e=>(g[e.date]=g[e.date]||[]).push(e));
+  return Object.keys(g).sort().map(d=>`<div class="dayhead" id="d-${d}"><h3>${longDay(d)}</h3><small>${g[d].length} event${g[d].length>1?'s':''}</small></div>${g[d].sort(byTime).map(card).join('')}`).join('');
+}
+
+function renderWeek(){
+  const s=data.week_start,en=data.week_end;
+  const all=data.events.filter(e=>e.date&&e.date>=s&&e.date<=en);
+  const list=all.filter(pass).sort(byTime);
+  $('#wk-title').textContent='Week of '+fmt(s,{day:'numeric',month:'short'})+' – '+fmt(en,{day:'numeric',month:'short',year:'numeric'});
+  const nNew=data.events.filter(e=>isNew(e)&&pass(e)).length;
+  $('#wk-meta').innerHTML=`<span>${list.length} event${list.length===1?'':'s'} this week</span><span>${nNew} new since Monday</span><span style="color:var(--mute)">Updated ${esc(fmt(data.updated,{weekday:'short',day:'numeric',month:'short'}))}</span>`;
+  let strip='';
+  for(let i=0;i<7;i++){const d=D(s);d.setDate(d.getDate()+i);const k=iso(d);const es=list.filter(e=>e.date===k);
+    strip+=`<a class="day${es.length?'':' empty'}" href="#this-week" data-jump="${k}"><b>${d.toLocaleDateString('en-GB',{weekday:'short'})}</b><span class="n">${d.getDate()}</span><div class="mags">${es.map(e=>`<i class="mag ${e.area}${e.highlight?' hl':''}" title="${esc(e.title)}"></i>`).join('')}</div></a>`;}
+  $('#wk-strip').innerHTML=strip;
+  const hl=data.events.filter(e=>e.highlight&&e.date&&e.date>=s&&pass(e)).sort(byTime).slice(0,6);
+  $('#hls').innerHTML=hl.length?hl.map(e=>`<div class="hl-card"><div class="when">${esc(fmt(e.date,{weekday:'short',day:'numeric',month:'short'}))}${e.start?' · '+esc(e.start):''}</div><h3>${esc(e.title)}</h3><p>${esc(e.highlight_reason||'')}<br>${esc(e.venue)}</p><a href="${esc(safeUrl(e.url))}" target="_blank" rel="noopener">Open event ↗</a></div>`).join(''):'<p class="empty-note">No highlights match these filters.</p>';
+  $('#wk-list').innerHTML=grouped(list);
+}
+
+function renderCal(){
+  const y=calMonth.getFullYear(),m=calMonth.getMonth();
+  $('#cal-title').textContent=calMonth.toLocaleDateString('en-GB',{month:'long',year:'numeric'});
+  const first=new Date(y,m,1),off=(first.getDay()+6)%7,start=new Date(y,m,1-off),cells=Math.ceil((off+new Date(y,m+1,0).getDate())/7)*7;
+  const today=iso(new Date()),evs=data.events.filter(e=>e.date&&pass(e));
+  let h=['Mon','Tue','Wed','Thu','Fri','Sat','Sun'].map(d=>`<div class="dow">${d}</div>`).join('');
+  for(let i=0;i<cells;i++){const d=new Date(y,m,1-off+i);const k=iso(d);const es=evs.filter(e=>e.date===k).sort(byTime);
+    h+=`<button type="button" class="cell${d.getMonth()!==m?' out':''}${k===today?' today':''}" data-day="${k}" aria-pressed="${k===calDay}" aria-label="${longDay(k)}, ${es.length} events"><span class="d">${d.getDate()}</span>${es.slice(0,3).map(e=>`<span class="ln ${e.area}">${esc(e.title)}</span>`).join('')}${es.length>3?`<span style="font-size:12px">+${es.length-3} more</span>`:''}</button>`;}
+  $('#cal').innerHTML=h;
+  const sel=calDay?evs.filter(e=>e.date===calDay):evs.filter(e=>e.date.slice(0,7)===iso(calMonth).slice(0,7)&&e.date>=today);
+  $('#cal-list').innerHTML=(calDay?'':'<p class="empty-note" style="margin-top:12px">Showing everything still to come this month. Tap a day to narrow it.</p>')+grouped(sel);
+}
+
+function renderAhead(){
+  const list=data.events.filter(e=>e.date&&e.date>data.week_end&&pass(e)).sort(byTime);
+  const undated=data.events.filter(e=>!e.date&&pass(e));
+  $('#ahead-list').innerHTML=grouped(list)+(undated.length?`<div class="dayhead"><h3>Dates to check</h3><small>bookable on selected dates</small></div>${undated.map(card).join('')}`:'');
+}
+
+function render(){
+  const v=['this-week','calendar','ahead'].includes(location.hash.slice(1))?location.hash.slice(1):'this-week';
+  document.querySelectorAll('.view').forEach(s=>s.hidden=s.id!=='v-'+v);
+  document.querySelectorAll('nav a').forEach(a=>{if(a.dataset.v===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+  if(!data)return;
+  if(v==='this-week')renderWeek();else if(v==='calendar')renderCal();else renderAhead();
+}
+
+document.querySelectorAll('#area button').forEach(b=>b.addEventListener('click',()=>{F.area=b.dataset.a;store.set('bdo-area',F.area);document.querySelectorAll('#area button').forEach(x=>x.setAttribute('aria-pressed',x===b));render()}));
+document.querySelectorAll('#area button').forEach(x=>x.setAttribute('aria-pressed',x.dataset.a===F.area));
+$('#cat').addEventListener('change',e=>{F.cat=e.target.value;render()});
+$('#free').addEventListener('change',e=>{F.free=e.target.checked;render()});
+$('#ver').addEventListener('change',e=>{F.ver=e.target.checked;render()});
+$('#prev').addEventListener('click',()=>{calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()-1,1);calDay=null;renderCal()});
+$('#next').addEventListener('click',()=>{calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()+1,1);calDay=null;renderCal()});
+$('#cal').addEventListener('click',e=>{const c=e.target.closest('.cell');if(!c)return;calDay=calDay===c.dataset.day?null:c.dataset.day;renderCal()});
+$('#wk-strip').addEventListener('click',e=>{const a=e.target.closest('[data-jump]');if(!a)return;e.preventDefault();const t=document.getElementById('d-'+a.dataset.jump);if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})});
+window.addEventListener('hashchange',render);
+
+render();
+fetch('events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(j=>{
+  data=j;data.events=data.events||[];
+  const cats=[...new Set(data.events.map(e=>e.category))].sort();
+  $('#cat').insertAdjacentHTML('beforeend',cats.map(c=>`<option>${esc(c)}</option>`).join(''));
+  const t=new Date(),ws=D(data.week_end),c=t>ws?t:ws;calMonth=new Date(c.getFullYear(),c.getMonth(),1);
+  if(data.notes){$('#notes').hidden=false;$('#notes').innerHTML='<strong>Not included this week:</strong> '+esc(data.notes)+'<br><br>Times and availability can change, so confirm with the organiser before travelling.'}
+  render();
+}).catch(()=>{$('#err').hidden=false});
+}
+</script>
+</body>
+</html>
