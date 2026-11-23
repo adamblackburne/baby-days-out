@@ -671,6 +671,31 @@
       ],
       "highlight": false,
       "added": "2026-11-23"
+    },
+    {
+      "id": "foxtots-music-weekly",
+      "title": "Foxtots Baby Toddler Music",
+      "organiser": "Foxtots Baby Toddler Music Group",
+      "date": "",
+      "start": "",
+      "end": "",
+      "venue": "Penge East Community Centre",
+      "address": "Station Road, London SE20 7BE",
+      "area": "local",
+      "category": "Music",
+      "age": "0–5 years",
+      "cost": "£5 taster, £11 single session",
+      "free": false,
+      "booking": "Weekly classes at Penge East Community Centre and Kin Wellbeing Studio, Crystal Palace. Current term times aren't published online yet, so check Happity or Foxtots' social pages",
+      "url": "https://www.happity.co.uk/foxtots-baby-toddler-music-group/south-east-london",
+      "urls": [
+        {
+          "label": "Kin Wellbeing Studio class page",
+          "url": "https://www.happity.co.uk/schedules/foxtots-baby-toddler-music-group-crystal-palace-kin-wellbeing-studio-spring-term-2025-part-one"
+        }
+      ],
+      "highlight": false,
+      "added": "2026-11-23"
     }
   ]
 }
