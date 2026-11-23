@@ -175,6 +175,7 @@ const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},se
 
 let data=null,F={area:store.get('bdo-area')||'all',cat:'',free:false,ver:false};
 let calMonth=null,calDay=null;
+let lastView=null;
 
 const pass=e=>(F.area==='all'||e.area===F.area)&&(!F.cat||e.category===F.cat)&&(!F.free||e.free)&&(!F.ver||e.status==='verified');
 const byTime=(a,b)=>(a.date+(a.start||'99')).localeCompare(b.date+(b.start||'99'));
@@ -259,6 +260,7 @@ function renderAhead(){
 
 function render(){
   const v=['this-week','next-week','calendar','ahead'].includes(location.hash.slice(1))?location.hash.slice(1):'this-week';
+  if(lastView&&v!==lastView)window.scrollTo(0,0);lastView=v;
   document.querySelectorAll('.view').forEach(s=>s.hidden=s.id!=='v-'+v);
   document.querySelectorAll('nav a').forEach(a=>{if(a.dataset.v===v)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
   if(!data)return;
