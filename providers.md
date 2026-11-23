@@ -4,8 +4,9 @@ The daily update checks every provider on this list by name, as well as doing it
 To add one, edit this file on GitHub: add a line with the provider, where it runs, and its best link.
 
 ## Classes and groups
-- Foxtots Baby Toddler Music Group – Penge East Community Centre (SE20 7BE) and Kin Wellbeing Studio, Crystal Palace (SE19 2TA) – https://www.happity.co.uk/foxtots-baby-toddler-music-group/south-east-london
-- Baby Sensory (Bromley & South East London) – Brown & Green Life, Crystal Palace Park (SE20 8DS); St John's Church, Eden Park, Beckenham – https://www.happity.co.uk/baby-sensory/beckenham
+- Foxtots – Penge East Community Centre (SE20 7BE, Mon and Tue), Brown & Green Life, Crystal Palace Park (SE20 8DS, Wed), The Honor Oak (SE23) – current Happity provider page: https://www.happity.co.uk/foxtots (the older "foxtots-baby-toddler-music-group" pages are out of date)
+- Baby Sensory (Bromley & South East London) – Brown & Green Life, Crystal Palace Park (SE20 8DS), Thursdays (Newborn 10:00, Older babies 11:05) – https://www.happity.co.uk/venues/baby-groups-london-brown-green-life-se20-8ds-3
+- Baby Sensory Beckenham – St John's Church, Eden Park (BR3 3JN) – https://www.happity.co.uk/baby-sensory/beckenham
 - Baby Sensory (Crystal Palace, Streatham and Tooting) – Upper Norwood Library Hub (SE19 1TJ) – https://www.happity.co.uk/baby-sensory/streatham
 - Hartbeeps (Baby Bells, Baby Beeps) – Brown & Green Life, Crystal Palace Park (SE20 8DS) – https://www.happity.co.uk/schedules/hartbeeps-london-brown-green-life-baby-beeps
 - It Takes A Village, Crystal Palace – free parent and baby meet-ups, St Hugh's Community Centre (SE20) – search Happity
@@ -28,5 +29,6 @@ To add one, edit this file on GitHub: add a line with the provider, where it run
 - Picturehouse (Crystal Palace / East Dulwich / Clapham) Big Scream – search for current listings
 
 ## Listing sites to sweep
+Note: Happity pages usually refuse direct fetching. Use WebSearch (mode "extended"), e.g. `happity <provider> <venue> <month year>`, and read the term name, days, times and "List of all dates" from the search results.
 - Happity by postcode: https://www.happity.co.uk/se20-7be/baby-toddler-classes and the same for SE19, SE26 and BR3
 - Hoop, Eventbrite (Penge, Crystal Palace, Beckenham, Sydenham), Bromley/Lewisham/Southwark/Croydon council family listings

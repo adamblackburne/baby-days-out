@@ -6,6 +6,31 @@
   "notes": "",
   "events": [
     {
+      "id": "foxtots-penge-2026-11-23-1600",
+      "title": "Foxtots Baby Toddler Music",
+      "organiser": "Foxtots",
+      "date": "2026-11-23",
+      "start": "16:00",
+      "end": "16:30",
+      "venue": "Penge East Community Centre",
+      "address": "Station Road, London SE20 7BE",
+      "area": "local",
+      "category": "Music",
+      "age": "0–5 years",
+      "cost": "£11 single session (£7 taster); term tickets £10 a class",
+      "free": false,
+      "booking": "Book on Happity · Term time only",
+      "url": "https://www.happity.co.uk/schedules/foxtots-london-penge-east-community-centre-autumn-term-first-half-mondays-16-00-16-30",
+      "urls": [
+        {
+          "label": "All Foxtots classes",
+          "url": "https://www.happity.co.uk/foxtots"
+        }
+      ],
+      "highlight": false,
+      "added": "2026-11-23"
+    },
+    {
       "id": "sydenham-rhyme-2026-11-24",
       "title": "Rhyme Time",
       "organiser": "Sydenham Community Library",
@@ -40,6 +65,75 @@
       "free": true,
       "booking": "Drop-in · Term time only",
       "url": "https://www.bromley.gov.uk/directory-record/7821/baby-bounce-and-rhyme",
+      "highlight": false,
+      "added": "2026-11-23"
+    },
+    {
+      "id": "foxtots-penge-2026-11-24-1100",
+      "title": "Foxtots Baby Toddler Music",
+      "organiser": "Foxtots",
+      "date": "2026-11-24",
+      "start": "11:00",
+      "end": "11:30",
+      "venue": "Penge East Community Centre",
+      "address": "Station Road, London SE20 7BE",
+      "area": "local",
+      "category": "Music",
+      "age": "0–5 years",
+      "cost": "£11 single session (£7 taster); term tickets £10 a class",
+      "free": false,
+      "booking": "Book on Happity · Term time only",
+      "url": "https://www.happity.co.uk/schedules/foxtots-london-penge-east-community-centre-autumn-term-first-half-tuesdays-11-00-11-30",
+      "urls": [
+        {
+          "label": "All Foxtots classes",
+          "url": "https://www.happity.co.uk/foxtots"
+        }
+      ],
+      "highlight": false,
+      "added": "2026-11-23"
+    },
+    {
+      "id": "foxtots-brown-2026-11-25-0930",
+      "title": "Foxtots Baby Toddler Music",
+      "organiser": "Foxtots",
+      "date": "2026-11-25",
+      "start": "09:30",
+      "end": "10:00",
+      "venue": "Brown & Green Life",
+      "address": "Thicket Road, Crystal Palace Park, London SE20 8DS",
+      "area": "local",
+      "category": "Music",
+      "age": "0–5 years",
+      "cost": "£11 single session (£7 taster); term tickets £10 a class",
+      "free": false,
+      "booking": "Book on Happity · Term time only · More Wednesday sessions later in the morning",
+      "url": "https://www.happity.co.uk/schedules/foxtots-london-brown-green-life-autumn-term-second-half",
+      "urls": [
+        {
+          "label": "All Foxtots classes",
+          "url": "https://www.happity.co.uk/foxtots"
+        }
+      ],
+      "highlight": false,
+      "added": "2026-11-23"
+    },
+    {
+      "id": "baby-sensory-newborn-brown-green-2026-11-26",
+      "title": "Baby Sensory (Newborn)",
+      "organiser": "Baby Sensory Bromley & South East London",
+      "date": "2026-11-26",
+      "start": "10:00",
+      "end": "10:45",
+      "venue": "Brown & Green Life",
+      "address": "Thicket Road, Crystal Palace Park, London SE20 8DS",
+      "area": "local",
+      "category": "Sensory",
+      "age": "0–7 months",
+      "cost": "£12.50",
+      "free": false,
+      "booking": "Book on Happity · Term time only",
+      "url": "https://www.happity.co.uk/venues/baby-groups-london-brown-green-life-se20-8ds-3",
       "highlight": false,
       "added": "2026-11-23"
     },
@@ -272,6 +366,31 @@
       ]
     },
     {
+      "id": "foxtots-penge-2026-11-30-1600",
+      "title": "Foxtots Baby Toddler Music",
+      "organiser": "Foxtots",
+      "date": "2026-11-30",
+      "start": "16:00",
+      "end": "16:30",
+      "venue": "Penge East Community Centre",
+      "address": "Station Road, London SE20 7BE",
+      "area": "local",
+      "category": "Music",
+      "age": "0–5 years",
+      "cost": "£11 single session (£7 taster); term tickets £10 a class",
+      "free": false,
+      "booking": "Book on Happity · Term time only",
+      "url": "https://www.happity.co.uk/schedules/foxtots-london-penge-east-community-centre-autumn-term-first-half-mondays-16-00-16-30",
+      "urls": [
+        {
+          "label": "All Foxtots classes",
+          "url": "https://www.happity.co.uk/foxtots"
+        }
+      ],
+      "highlight": false,
+      "added": "2026-11-23"
+    },
+    {
       "id": "sydenham-rhyme-2026-12-01",
       "title": "Rhyme Time",
       "organiser": "Sydenham Community Library",
@@ -310,6 +429,56 @@
       "added": "2026-11-23"
     },
     {
+      "id": "foxtots-penge-2026-12-01-1100",
+      "title": "Foxtots Baby Toddler Music",
+      "organiser": "Foxtots",
+      "date": "2026-12-01",
+      "start": "11:00",
+      "end": "11:30",
+      "venue": "Penge East Community Centre",
+      "address": "Station Road, London SE20 7BE",
+      "area": "local",
+      "category": "Music",
+      "age": "0–5 years",
+      "cost": "£11 single session (£7 taster); term tickets £10 a class",
+      "free": false,
+      "booking": "Book on Happity · Term time only",
+      "url": "https://www.happity.co.uk/schedules/foxtots-london-penge-east-community-centre-autumn-term-first-half-tuesdays-11-00-11-30",
+      "urls": [
+        {
+          "label": "All Foxtots classes",
+          "url": "https://www.happity.co.uk/foxtots"
+        }
+      ],
+      "highlight": false,
+      "added": "2026-11-23"
+    },
+    {
+      "id": "foxtots-brown-2026-12-02-0930",
+      "title": "Foxtots Baby Toddler Music",
+      "organiser": "Foxtots",
+      "date": "2026-12-02",
+      "start": "09:30",
+      "end": "10:00",
+      "venue": "Brown & Green Life",
+      "address": "Thicket Road, Crystal Palace Park, London SE20 8DS",
+      "area": "local",
+      "category": "Music",
+      "age": "0–5 years",
+      "cost": "£11 single session (£7 taster); term tickets £10 a class",
+      "free": false,
+      "booking": "Book on Happity · Term time only · More Wednesday sessions later in the morning",
+      "url": "https://www.happity.co.uk/schedules/foxtots-london-brown-green-life-autumn-term-second-half",
+      "urls": [
+        {
+          "label": "All Foxtots classes",
+          "url": "https://www.happity.co.uk/foxtots"
+        }
+      ],
+      "highlight": false,
+      "added": "2026-11-23"
+    },
+    {
       "id": "vam-design-baby-2026-12-02",
       "title": "Design Baby: Leap Then Look",
       "organiser": "V&A South Kensington",
@@ -333,6 +502,25 @@
       ],
       "highlight": true,
       "highlight_reason": "Free, child-led sensory sculpture play, and the 11:00 slot is for pre-walkers.",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "baby-sensory-newborn-brown-green-2026-12-03",
+      "title": "Baby Sensory (Newborn)",
+      "organiser": "Baby Sensory Bromley & South East London",
+      "date": "2026-12-03",
+      "start": "10:00",
+      "end": "10:45",
+      "venue": "Brown & Green Life",
+      "address": "Thicket Road, Crystal Palace Park, London SE20 8DS",
+      "area": "local",
+      "category": "Sensory",
+      "age": "0–7 months",
+      "cost": "£12.50",
+      "free": false,
+      "booking": "Book on Happity · Term time only",
+      "url": "https://www.happity.co.uk/venues/baby-groups-london-brown-green-life-se20-8ds-3",
+      "highlight": false,
       "added": "2026-11-23"
     },
     {
@@ -513,6 +701,56 @@
       "added": "2026-11-23"
     },
     {
+      "id": "foxtots-penge-2026-12-07-1600",
+      "title": "Foxtots Baby Toddler Music",
+      "organiser": "Foxtots",
+      "date": "2026-12-07",
+      "start": "16:00",
+      "end": "16:30",
+      "venue": "Penge East Community Centre",
+      "address": "Station Road, London SE20 7BE",
+      "area": "local",
+      "category": "Music",
+      "age": "0–5 years",
+      "cost": "£11 single session (£7 taster); term tickets £10 a class",
+      "free": false,
+      "booking": "Book on Happity · Term time only",
+      "url": "https://www.happity.co.uk/schedules/foxtots-london-penge-east-community-centre-autumn-term-first-half-mondays-16-00-16-30",
+      "urls": [
+        {
+          "label": "All Foxtots classes",
+          "url": "https://www.happity.co.uk/foxtots"
+        }
+      ],
+      "highlight": false,
+      "added": "2026-11-23"
+    },
+    {
+      "id": "foxtots-penge-2026-12-08-1100",
+      "title": "Foxtots Baby Toddler Music",
+      "organiser": "Foxtots",
+      "date": "2026-12-08",
+      "start": "11:00",
+      "end": "11:30",
+      "venue": "Penge East Community Centre",
+      "address": "Station Road, London SE20 7BE",
+      "area": "local",
+      "category": "Music",
+      "age": "0–5 years",
+      "cost": "£11 single session (£7 taster); term tickets £10 a class",
+      "free": false,
+      "booking": "Book on Happity · Term time only",
+      "url": "https://www.happity.co.uk/schedules/foxtots-london-penge-east-community-centre-autumn-term-first-half-tuesdays-11-00-11-30",
+      "urls": [
+        {
+          "label": "All Foxtots classes",
+          "url": "https://www.happity.co.uk/foxtots"
+        }
+      ],
+      "highlight": false,
+      "added": "2026-11-23"
+    },
+    {
       "id": "rah-baby-gospel-2026-12-08",
       "title": "Baby Gospel Christmas",
       "organiser": "Royal Albert Hall",
@@ -539,6 +777,31 @@
       "added": "2026-11-23"
     },
     {
+      "id": "foxtots-brown-2026-12-09-0930",
+      "title": "Foxtots Baby Toddler Music",
+      "organiser": "Foxtots",
+      "date": "2026-12-09",
+      "start": "09:30",
+      "end": "10:00",
+      "venue": "Brown & Green Life",
+      "address": "Thicket Road, Crystal Palace Park, London SE20 8DS",
+      "area": "local",
+      "category": "Music",
+      "age": "0–5 years",
+      "cost": "£11 single session (£7 taster); term tickets £10 a class",
+      "free": false,
+      "booking": "Book on Happity · Term time only · More Wednesday sessions later in the morning",
+      "url": "https://www.happity.co.uk/schedules/foxtots-london-brown-green-life-autumn-term-second-half",
+      "urls": [
+        {
+          "label": "All Foxtots classes",
+          "url": "https://www.happity.co.uk/foxtots"
+        }
+      ],
+      "highlight": false,
+      "added": "2026-11-23"
+    },
+    {
       "id": "rah-baby-broadway-2026-12-09",
       "title": "Baby Broadway Christmas",
       "organiser": "Royal Albert Hall",
@@ -562,6 +825,25 @@
       ],
       "highlight": true,
       "highlight_reason": "Show tunes for babies in the Royal Albert Hall's Elgar Room.",
+      "added": "2026-11-23"
+    },
+    {
+      "id": "baby-sensory-newborn-brown-green-2026-12-10",
+      "title": "Baby Sensory (Newborn)",
+      "organiser": "Baby Sensory Bromley & South East London",
+      "date": "2026-12-10",
+      "start": "10:00",
+      "end": "10:45",
+      "venue": "Brown & Green Life",
+      "address": "Thicket Road, Crystal Palace Park, London SE20 8DS",
+      "area": "local",
+      "category": "Sensory",
+      "age": "0–7 months",
+      "cost": "£12.50",
+      "free": false,
+      "booking": "Book on Happity · Term time only",
+      "url": "https://www.happity.co.uk/venues/baby-groups-london-brown-green-life-se20-8ds-3",
+      "highlight": false,
       "added": "2026-11-23"
     },
     {
@@ -629,6 +911,56 @@
       "added": "2026-11-23"
     },
     {
+      "id": "foxtots-penge-2026-12-14-1500",
+      "title": "Foxtots Christmas Special",
+      "organiser": "Foxtots",
+      "date": "2026-12-14",
+      "start": "15:00",
+      "end": "16:30",
+      "venue": "Penge East Community Centre",
+      "address": "Station Road, London SE20 7BE",
+      "area": "local",
+      "category": "Music",
+      "age": "0–5 years",
+      "cost": "£11",
+      "free": false,
+      "booking": "Two sessions: 15:00–15:30 and 16:00–16:30 · Book on Happity",
+      "url": "https://www.happity.co.uk/foxtots",
+      "urls": [
+        {
+          "label": "All Foxtots classes",
+          "url": "https://www.happity.co.uk/foxtots"
+        }
+      ],
+      "highlight": false,
+      "added": "2026-11-23"
+    },
+    {
+      "id": "foxtots-brown-2026-12-16-1030",
+      "title": "Foxtots Christmas Special",
+      "organiser": "Foxtots",
+      "date": "2026-12-16",
+      "start": "10:30",
+      "end": "11:00",
+      "venue": "Brown & Green Life",
+      "address": "Thicket Road, Crystal Palace Park, London SE20 8DS",
+      "area": "local",
+      "category": "Music",
+      "age": "0–5 years",
+      "cost": "£11",
+      "free": false,
+      "booking": "Book on Happity · Live instruments, Christmas props and bubbles",
+      "url": "https://www.happity.co.uk/foxtots",
+      "urls": [
+        {
+          "label": "All Foxtots classes",
+          "url": "https://www.happity.co.uk/foxtots"
+        }
+      ],
+      "highlight": false,
+      "added": "2026-11-23"
+    },
+    {
       "id": "tots-docks-2026-12-16",
       "title": "Tots at the Docks: Frost Fairs",
       "organiser": "London Museum Docklands",
@@ -667,31 +999,6 @@
         {
           "label": "Pre-crawler booking",
           "url": "https://ticketing.nhm.ac.uk/events/VISEV-ABBA"
-        }
-      ],
-      "highlight": false,
-      "added": "2026-11-23"
-    },
-    {
-      "id": "foxtots-music-weekly",
-      "title": "Foxtots Baby Toddler Music",
-      "organiser": "Foxtots Baby Toddler Music Group",
-      "date": "",
-      "start": "",
-      "end": "",
-      "venue": "Penge East Community Centre",
-      "address": "Station Road, London SE20 7BE",
-      "area": "local",
-      "category": "Music",
-      "age": "0–5 years",
-      "cost": "£5 taster, £11 single session",
-      "free": false,
-      "booking": "Weekly classes at Penge East Community Centre and Kin Wellbeing Studio, Crystal Palace. Current term times aren't published online yet, so check Happity or Foxtots' social pages",
-      "url": "https://www.happity.co.uk/foxtots-baby-toddler-music-group/south-east-london",
-      "urls": [
-        {
-          "label": "Kin Wellbeing Studio class page",
-          "url": "https://www.happity.co.uk/schedules/foxtots-baby-toddler-music-group-crystal-palace-kin-wellbeing-studio-spring-term-2025-part-one"
         }
       ],
       "highlight": false,
