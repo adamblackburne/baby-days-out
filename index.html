@@ -55,7 +55,8 @@ main{padding-block:28px 60px}
 .hl-card{background:var(--sun);color:var(--sunInk);border-radius:18px;padding:18px}
 .hl-card p{margin:6px 0 10px}.hl-card .when{font-weight:700}
 .hl-card a{font-weight:700}
-.dayhead{display:flex;align-items:baseline;gap:12px;margin:34px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--ink);scroll-margin-top:150px}
+.dayhead{display:flex;align-items:baseline;gap:12px;margin:34px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--ink);scroll-margin-top:calc(var(--hdr,150px) + 12px)}
+.dayhead.focus{border-bottom-color:var(--sun);border-bottom-width:4px}.dayhead.focus h3::after{content:' · selected';color:var(--mute);font-size:.8em;font-weight:600}
 .dayhead small{color:var(--mute);font-weight:600}
 .ev{display:grid;grid-template-columns:5.2em minmax(0,1fr);gap:14px;padding:14px 0;border-bottom:1px solid var(--line)}
 .ev .t{font-family:Fredoka,sans-serif;font-size:20px;white-space:nowrap}
@@ -86,6 +87,7 @@ dl{display:grid;grid-template-columns:7em minmax(0,1fr);gap:4px 12px;margin:8px 
 @media(max-width:760px){.week{grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.day{min-height:96px;padding:8px 5px;border-radius:12px}.day b{font-size:13px}.day span.n{font-size:22px}.mag{width:12px;height:12px}.cell{min-height:58px;padding:4px}.cell .ln{font-size:0;height:8px;padding:0}}
 @media(max-width:600px){.ev{grid-template-columns:4.4em minmax(0,1fr);gap:10px}.ev .t{font-size:17px}dl{grid-template-columns:minmax(0,1fr)}dt{margin-top:4px}nav a{padding:10px 11px}
 @media(max-width:420px){nav{gap:0;width:100%;justify-content:space-between;flex-wrap:nowrap}nav a{padding:10px 6px;font-size:14px;white-space:nowrap}}}
+@media(max-width:600px){.filters{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-inline:calc(-1 * max(4vw,16px));padding-inline:max(4vw,16px);gap:6px}.filters::-webkit-scrollbar{display:none}.filters>*{flex:none}.seg button{padding:8px 11px}.tog{padding:8px 11px;font-size:15px;white-space:nowrap}}
 @media(prefers-reduced-motion:no-preference){.view{animation:in .25s ease-out}@keyframes in{from{opacity:0;transform:translateY(6px)}}}
 </style>
 </head>
@@ -137,7 +139,7 @@ dl{display:grid;grid-template-columns:7em minmax(0,1fr);gap:4px 12px;margin:8px 
 
   <section class="view" id="v-calendar" hidden>
     <h1>Calendar</h1>
-    <p class="lede">Everything coming up, local and central. Tap a day to see its events.</p>
+    <p class="lede">Everything coming up, local and central. Tap a day to see its week.</p>
     <div class="cal-head" style="margin-top:20px">
       <button type="button" id="prev" aria-label="Previous month">‹</button>
       <h2 id="cal-title" style="min-width:8em"></h2>
@@ -236,8 +238,17 @@ function renderCal(){
   for(let i=0;i<cells;i++){const d=new Date(y,m,1-off+i);const k=iso(d);const es=evs.filter(e=>e.date===k).sort(byTime);
     h+=`<button type="button" class="cell${d.getMonth()!==m?' out':''}${k===today?' today':''}" data-day="${k}" aria-pressed="${k===calDay}" aria-label="${longDay(k)}, ${es.length} events"><span class="d">${d.getDate()}</span>${es.slice(0,3).map(e=>`<span class="ln ${e.area}">${esc(e.title)}</span>`).join('')}${es.length>3?`<span style="font-size:12px">+${es.length-3} more</span>`:''}</button>`;}
   $('#cal').innerHTML=h;
-  const sel=calDay?evs.filter(e=>e.date===calDay):evs.filter(e=>e.date.slice(0,7)===iso(calMonth).slice(0,7)&&e.date>=today);
-  $('#cal-list').innerHTML=(calDay?'':'<p class="empty-note" style="margin-top:12px">Showing everything still to come this month. Tap a day to narrow it.</p>')+grouped(sel);
+  if(calDay){
+    const cd=D(calDay);cd.setDate(cd.getDate()-((cd.getDay()+6)%7));const ws=iso(cd),we=addDays(ws,6);
+    let out=`<p class="empty-note" style="margin-top:12px">Showing the week of ${esc(fmt(ws,{day:'numeric',month:'short'}))} – ${esc(fmt(we,{day:'numeric',month:'short'}))}. Tap the day again to see the whole month.</p>`;
+    for(let i=0;i<7;i++){const k=addDays(ws,i),es=evs.filter(e=>e.date===k).sort(byTime),f=k===calDay;
+      if(!es.length&&!f)continue;
+      out+=`<div class="dayhead${f?' focus':''}" id="cal-${k}"><h3>${longDay(k)}</h3><small>${es.length?es.length+' event'+(es.length>1?'s':''):''}</small></div>${es.length?es.map(card).join(''):'<p class="empty-note">Nothing listed for this day.</p>'}`;}
+    $('#cal-list').innerHTML=out;
+  }else{
+    const sel=evs.filter(e=>e.date.slice(0,7)===iso(calMonth).slice(0,7)&&e.date>=today);
+    $('#cal-list').innerHTML='<p class="empty-note" style="margin-top:12px">Showing everything still to come this month. Tap a day to see its week.</p>'+grouped(sel);
+  }
 }
 
 function renderAhead(){
@@ -262,9 +273,10 @@ $('#free').addEventListener('change',e=>{F.free=e.target.checked;render()});
 $('#ver').addEventListener('change',e=>{F.ver=e.target.checked;render()});
 $('#prev').addEventListener('click',()=>{calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()-1,1);calDay=null;renderCal()});
 $('#next').addEventListener('click',()=>{calMonth=new Date(calMonth.getFullYear(),calMonth.getMonth()+1,1);calDay=null;renderCal()});
-$('#cal').addEventListener('click',e=>{const c=e.target.closest('.cell');if(!c)return;calDay=calDay===c.dataset.day?null:c.dataset.day;renderCal()});
+$('#cal').addEventListener('click',e=>{const c=e.target.closest('.cell');if(!c)return;calDay=calDay===c.dataset.day?null:c.dataset.day;renderCal();if(calDay){const t=document.getElementById('cal-'+calDay);if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}});
 document.querySelectorAll('#wk-strip,#nx-strip').forEach(el=>el.addEventListener('click',e=>{const a=e.target.closest('[data-jump]');if(!a)return;e.preventDefault();const t=document.getElementById(a.dataset.jump);if(t)t.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'})}));
 window.addEventListener('hashchange',render);
+{const h=$('header.top'),setH=()=>document.documentElement.style.setProperty('--hdr',h.offsetHeight+'px');setH();if(window.ResizeObserver)new ResizeObserver(setH).observe(h);else addEventListener('resize',setH)}
 
 render();
 fetch('events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json()}).then(j=>{
