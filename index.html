@@ -81,7 +81,7 @@ dl{display:grid;grid-template-columns:7em minmax(0,1fr);gap:4px 12px;margin:8px 
 .cell .d{font-weight:700;font-size:14px}
 .cell .ln{font-size:12px;line-height:1.25;padding:2px 5px;border-radius:6px;color:#fff;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
 .cell .ln.local{background:var(--loc)}.cell .ln.central{background:var(--cen);color:var(--bg)}
-.notes{margin-top:44px;padding:18px;border-radius:16px;background:var(--card);color:var(--mute);font-size:15px}
+
 .err{padding:40px 0;color:var(--mute)}
 [hidden]{display:none!important}
 @media(max-width:760px){.week{grid-template-columns:repeat(7,minmax(0,1fr));gap:4px}.day{min-height:96px;padding:8px 5px;border-radius:12px}.day b{font-size:13px}.day span.n{font-size:22px}.mag{width:12px;height:12px}.cell{min-height:58px;padding:4px}.cell .ln{font-size:0;height:8px;padding:0}}
@@ -155,7 +155,6 @@ dl{display:grid;grid-template-columns:7em minmax(0,1fr);gap:4px 12px;margin:8px 
     <div id="ahead-list"></div>
   </section>
 
-  <div class="notes" id="notes" hidden></div>
   <p class="err" id="err" hidden>Couldn't load the events just now. Please refresh the page.</p>
 </main>
 
@@ -279,7 +278,6 @@ fetch('events.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw 0;return r.json(
   const cats=[...new Set(data.events.map(e=>e.category))].sort();
   $('#cat').insertAdjacentHTML('beforeend',cats.map(c=>`<option>${esc(c)}</option>`).join(''));
   const t=new Date();calMonth=new Date(t.getFullYear(),t.getMonth(),1);
-  if(data.notes){$('#notes').hidden=false;$('#notes').innerHTML='<strong>Still to confirm:</strong> '+esc(data.notes)+'<br><br>Times and availability can change, so confirm with the organiser before travelling.'}
   render();
 }).catch(()=>{$('#err').hidden=false});
 }
